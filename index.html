@@ -133,14 +133,20 @@
       top: 0;
       z-index: var(--z-dropdown);
       height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 var(--space-16);
       background: var(--backdrop-bg);
       backdrop-filter: var(--backdrop);
       -webkit-backdrop-filter: var(--backdrop);
       border-bottom: 1px solid var(--color-border);
+      padding: 0 var(--space-8);
+    }
+
+    .nav__inner {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: var(--space-6);
     }
 
@@ -269,9 +275,9 @@
 
     /* ─── Main layout ─── */
     .main {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: var(--space-8) var(--space-16);
+      padding: var(--space-8);
     }
 
     .main__header {
@@ -321,7 +327,7 @@
     /* ─── Icons grid ─── */
     .icons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: var(--space-3);
     }
 
@@ -330,19 +336,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-4) var(--space-3) var(--space-3);
+      padding: var(--space-6) var(--space-4) var(--space-4);
       background: var(--color-bg-secondary);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
+      cursor: default;
       transition:
         box-shadow   var(--duration-base) var(--ease-out),
         border-color var(--duration-base) var(--ease-out);
       position: relative;
-      overflow: hidden;
+      min-height: 160px;
     }
 
     .icon-card:hover {
@@ -350,20 +353,18 @@
       border-color: var(--color-border-strong);
     }
 
-    .icon-card:hover .icon-card__download { opacity: 1; transform: translateY(0); }
-    .icon-card:hover .icon-card__name { opacity: 0.6; }
+    .icon-card:hover .icon-card__download { opacity: 1; }
 
     .icon-card__preview {
-      width: 48px;
-      height: 48px;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .icon-card__preview img {
-      width: 40px;
-      height: 40px;
+      width: 56px;
+      height: 56px;
       object-fit: contain;
     }
 
@@ -388,35 +389,39 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      transition: opacity var(--duration-fast) var(--ease-out);
+      margin-top: var(--space-3);
     }
 
     .icon-card__download {
-      display: inline-flex;
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: var(--space-1);
+      width: 28px;
       height: 28px;
-      padding: 0 var(--space-3);
-      background: var(--color-accent);
-      color: var(--color-accent-text);
+      background: transparent;
       border: none;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 500;
-      font-family: var(--font-sans);
+      border-radius: var(--radius-md);
+      color: var(--color-text-subtle);
       text-decoration: none;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(4px);
       transition:
-        opacity   var(--duration-fast) var(--ease-out),
-        transform var(--duration-fast) var(--ease-out);
+        opacity     var(--duration-fast) var(--ease-out),
+        color       var(--duration-fast) var(--ease-out),
+        background  var(--duration-fast) var(--ease-out);
+    }
+
+    .icon-card__download:hover {
+      color: var(--color-text);
+      background: var(--color-bg-tertiary);
     }
 
     .icon-card__download svg {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
@@ -427,31 +432,24 @@
 
     /* Touch devices: always show download */
     @media (hover: none) {
-      .icon-card__download { opacity: 1; transform: translateY(0); }
-      .icon-card__name { opacity: 0.6; }
+      .icon-card__download { opacity: 1; }
     }
 
     /* ─── Responsive ─── */
-    @media (max-width: 1024px) {
-      .nav { padding: 0 var(--space-8); }
-      .main { padding: var(--space-8); }
-    }
-
     @media (max-width: 768px) {
       .nav {
         height: 56px;
         padding: 0 var(--space-4);
-        gap: var(--space-2);
       }
       .main { padding: var(--space-6) var(--space-4); }
       .search-field__input { width: 160px; }
       .search-field__input:focus { width: 200px; }
-      .icons-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--space-2); }
+      .icons-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
     }
 
     @media (max-width: 480px) {
       .nav__title { font-size: var(--text-small-size); font-weight: 600; }
-      .icons-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+      .icons-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -459,44 +457,46 @@
 
   <!-- Navigation -->
   <nav class="nav" role="banner">
-    <div class="nav__brand">
-      <span class="nav__title">Linearicons</span>
-      <span class="nav__badge" id="count-badge">100</span>
-    </div>
-
-    <div class="nav__actions">
-      <!-- Search -->
-      <div class="search-field">
-        <svg aria-hidden="true" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input
-          class="search-field__input"
-          type="search"
-          id="search-input"
-          placeholder="Rechercher…"
-          aria-label="Rechercher une icône"
-          autocomplete="off"
-        />
+    <div class="nav__inner">
+      <div class="nav__brand">
+        <span class="nav__title">Linearicons</span>
+        <span class="nav__badge" id="count-badge">100</span>
       </div>
 
-      <!-- Dark mode toggle -->
-      <button class="btn-icon" id="theme-toggle" aria-label="Basculer le thème">
-        <svg id="icon-sun" aria-hidden="true" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg id="icon-moon" aria-hidden="true" viewBox="0 0 24 24" style="display:none">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <div class="nav__actions">
+        <!-- Search -->
+        <div class="search-field">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            class="search-field__input"
+            type="search"
+            id="search-input"
+            placeholder="Rechercher…"
+            aria-label="Rechercher une icône"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Dark mode toggle -->
+        <button class="btn-icon" id="theme-toggle" aria-label="Basculer le thème">
+          <svg id="icon-sun" aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="icon-moon" aria-hidden="true" viewBox="0 0 24 24" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -628,6 +628,28 @@
     const countBadge = document.getElementById('count-badge');
     const emptyState = document.getElementById('empty-state');
 
+    function forceDownload(url, filename) {
+      fetch(url)
+        .then(r => r.blob())
+        .then(blob => {
+          const blobUrl = URL.createObjectURL(blob);
+          const tmp = document.createElement('a');
+          tmp.href = blobUrl;
+          tmp.download = filename;
+          document.body.appendChild(tmp);
+          tmp.click();
+          document.body.removeChild(tmp);
+          URL.revokeObjectURL(blobUrl);
+        })
+        .catch(() => {
+          // Fallback pour file:// protocol
+          const tmp = document.createElement('a');
+          tmp.href = url;
+          tmp.download = filename;
+          tmp.click();
+        });
+    }
+
     function buildCard(icon) {
       const card = document.createElement('div');
       card.className = 'icon-card';
@@ -639,8 +661,8 @@
       const img = document.createElement('img');
       img.src = `SVG/${icon.file}`;
       img.alt = icon.name;
-      img.width = 40;
-      img.height = 40;
+      img.width = 56;
+      img.height = 56;
       img.loading = 'lazy';
       preview.appendChild(img);
 
@@ -649,12 +671,11 @@
       name.textContent = icon.name;
       name.title = icon.name;
 
-      const dl = document.createElement('a');
+      const dl = document.createElement('button');
       dl.className = 'icon-card__download';
-      dl.href = `SVG/${icon.file}`;
-      dl.download = icon.file;
       dl.setAttribute('aria-label', `Télécharger ${icon.name}`);
-      dl.innerHTML = DOWNLOAD_SVG + 'SVG';
+      dl.innerHTML = DOWNLOAD_SVG;
+      dl.addEventListener('click', () => forceDownload(`SVG/${icon.file}`, icon.file));
 
       card.appendChild(preview);
       card.appendChild(name);
