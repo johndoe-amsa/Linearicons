@@ -326,15 +326,13 @@
 
     /* ─── Icons grid ─── */
     .icons-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: var(--space-3);
-      justify-content: center;
     }
 
     /* ─── Icon card ─── */
     .icon-card {
-      flex: 0 0 calc((100% - 4 * var(--space-3)) / 5);
       aspect-ratio: 1;
       display: flex;
       flex-direction: column;
@@ -446,13 +444,12 @@
       .main { padding: var(--space-6) var(--space-4); }
       .search-field__input { width: 160px; }
       .search-field__input:focus { width: 200px; }
-      .icons-grid { gap: var(--space-2); }
-      .icon-card  { flex: 0 0 calc((100% - 3 * var(--space-2)) / 4); }
+      .icons-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
     }
 
     @media (max-width: 480px) {
       .nav__title { font-size: var(--text-small-size); font-weight: 600; }
-      .icon-card { flex: 0 0 calc((100% - 2 * var(--space-2)) / 3); }
+      .icons-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -592,13 +589,27 @@
       return card;
     }
 
+    function centerLastRow() {
+      const items = grid.querySelectorAll('.icon-card');
+      if (items.length === 0) return;
+      items.forEach(item => item.style.gridColumnStart = '');
+      const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      const remainder = items.length % cols;
+      if (remainder === 0) return;
+      const startCol = Math.floor((cols - remainder) / 2) + 1;
+      items[items.length - remainder].style.gridColumnStart = startCol;
+    }
+
     function renderIcons(icons) {
       grid.innerHTML = '';
       icons.forEach(icon => grid.appendChild(buildCard(icon)));
       const n = icons.length;
       resultCount.textContent = `${n} icône${n !== 1 ? 's' : ''}`;
       countBadge.textContent = n;
+      centerLastRow();
     }
+
+    new ResizeObserver(centerLastRow).observe(grid);
 
     // Search filter
     searchInput.addEventListener('input', () => {
