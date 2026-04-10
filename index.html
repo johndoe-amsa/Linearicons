@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linearicons — SVG Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Tokens ─── */
+    :root {
+      --color-bg:           #FFFFFF;
+      --color-bg-secondary: #FAFAFA;
+      --color-bg-tertiary:  #F2F2F2;
+      --color-text:         #111111;
+      --color-text-muted:   #666666;
+      --color-text-subtle:  #999999;
+      --color-border:       #EAEAEA;
+      --color-border-strong:#000000;
+      --color-border-focus: #000000;
+      --color-accent:       #000000;
+      --color-accent-text:  #FFFFFF;
+      --color-success:      #16A34A;
+      --color-error:        #EE0000;
+      --color-warning:      #F5A623;
+
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', Menlo, monospace;
+
+      --text-h1-size: 42px; --text-h1-weight: 700; --text-h1-lh: 1.1; --text-h1-ls: -0.04em;
+      --text-h2-size: 28px; --text-h2-weight: 600; --text-h2-lh: 1.2; --text-h2-ls: -0.03em;
+      --text-h3-size: 20px; --text-h3-weight: 600; --text-h3-lh: 1.3; --text-h3-ls: -0.02em;
+      --text-body-size: 16px; --text-body-weight: 400; --text-body-lh: 1.5;
+      --text-small-size: 14px; --text-small-weight: 400; --text-small-lh: 1.5;
+      --text-label-size: 12px; --text-label-weight: 500; --text-label-lh: 1; --text-label-ls: 0.05em;
+      --text-code-size: 13px; --text-code-weight: 400; --text-code-lh: 1.6;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-6:  24px;
+      --space-8:  32px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      --radius-sm:   6px;
+      --radius-md:   8px;
+      --radius-lg:  12px;
+      --radius-full: 9999px;
+
+      --elevation-0: none;
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.05);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.08);
+
+      --backdrop:    blur(12px);
+      --backdrop-bg: rgba(255,255,255,0.85);
+
+      --duration-fast: 150ms;
+      --duration-base: 200ms;
+      --duration-slow: 300ms;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --z-dropdown: 100;
+      --z-modal:    200;
+      --z-toast:    300;
+      --z-tooltip:  400;
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+      --color-accent:       #EDEDED;
+      --color-accent-text:  #000000;
+      --color-bg:           #000000;
+      --color-bg-secondary: #0A0A0A;
+      --color-bg-tertiary:  #111111;
+      --color-text:         #EDEDED;
+      --color-text-muted:   #888888;
+      --color-text-subtle:  #555555;
+      --color-border:       #333333;
+      --color-border-strong:#FFFFFF;
+      --color-border-focus: #FFFFFF;
+      --backdrop-bg: rgba(0,0,0,0.85);
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.3);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.5);
+    }}
+
+    :root[data-theme="dark"] {
+      --color-accent:       #EDEDED;
+      --color-accent-text:  #000000;
+      --color-bg:           #000000;
+      --color-bg-secondary: #0A0A0A;
+      --color-bg-tertiary:  #111111;
+      --color-text:         #EDEDED;
+      --color-text-muted:   #888888;
+      --color-text-subtle:  #555555;
+      --color-border:       #333333;
+      --color-border-strong:#FFFFFF;
+      --color-border-focus: #FFFFFF;
+      --backdrop-bg: rgba(0,0,0,0.85);
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.3);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid var(--color-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-body-size);
+      font-weight: var(--text-body-weight);
+      line-height: var(--text-body-lh);
+      color: var(--color-text);
+      background: var(--color-bg);
+      min-height: 100vh;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-dropdown);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-16);
+      background: var(--backdrop-bg);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      border-bottom: 1px solid var(--color-border);
+      gap: var(--space-6);
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-shrink: 0;
+    }
+
+    .nav__title {
+      font-size: var(--text-h3-size);
+      font-weight: var(--text-h3-weight);
+      letter-spacing: var(--text-h3-ls);
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .nav__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* ─── Search Field ─── */
+    .search-field { position: relative; display: flex; align-items: center; }
+
+    .search-field svg {
+      position: absolute;
+      left: 10px;
+      width: 16px;
+      height: 16px;
+      color: var(--color-text-subtle);
+      pointer-events: none;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .search-field__input {
+      height: 36px;
+      padding: 0 var(--space-3) 0 34px;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-small-size);
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      width: 240px;
+      transition:
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow   var(--duration-fast) var(--ease-out),
+        width        var(--duration-base) var(--ease-out);
+    }
+
+    .search-field__input::placeholder { color: var(--color-text-subtle); }
+
+    .search-field__input:focus {
+      outline: none;
+      border-color: var(--color-border-focus);
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+      width: 300px;
+    }
+
+    :root[data-theme="dark"] .search-field__input:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .search-field__input:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }}
+
+    /* ─── Dark mode toggle ─── */
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition:
+        color       var(--duration-fast) var(--ease-out),
+        background  var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .btn-icon:hover {
+      color: var(--color-text);
+      background: var(--color-bg-tertiary);
+      border-color: var(--color-border-strong);
+    }
+
+    .btn-icon:active { transform: scale(0.95); }
+
+    .btn-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── Main layout ─── */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-16);
+    }
+
+    .main__header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .main__count {
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Empty state ─── */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-8);
+      color: var(--color-text-subtle);
+      gap: var(--space-3);
+    }
+
+    .empty-state svg {
+      width: 32px;
+      height: 32px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.4;
+    }
+
+    .empty-state p {
+      font-size: var(--text-small-size);
+    }
+
+    .empty-state.is-visible { display: flex; }
+
+    /* ─── Icons grid ─── */
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: var(--space-3);
+    }
+
+    /* ─── Icon card ─── */
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-3) var(--space-3);
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition:
+        box-shadow   var(--duration-base) var(--ease-out),
+        border-color var(--duration-base) var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-card:hover {
+      box-shadow: var(--elevation-1);
+      border-color: var(--color-border-strong);
+    }
+
+    .icon-card:hover .icon-card__download { opacity: 1; transform: translateY(0); }
+    .icon-card:hover .icon-card__name { opacity: 0.6; }
+
+    .icon-card__preview {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-card__preview img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    /* Dark mode: invert SVGs (they are black on white) */
+    :root[data-theme="dark"] .icon-card__preview img {
+      filter: invert(1);
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .icon-card__preview img {
+      filter: invert(1);
+    }}
+
+    .icon-card__name {
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: var(--text-label-lh);
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    .icon-card__download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      height: 28px;
+      padding: 0 var(--space-3);
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      border: none;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(4px);
+      transition:
+        opacity   var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+    }
+
+    .icon-card__download svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Touch devices: always show download */
+    @media (hover: none) {
+      .icon-card__download { opacity: 1; transform: translateY(0); }
+      .icon-card__name { opacity: 0.6; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .nav { padding: 0 var(--space-8); }
+      .main { padding: var(--space-8); }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        height: 56px;
+        padding: 0 var(--space-4);
+        gap: var(--space-2);
+      }
+      .main { padding: var(--space-6) var(--space-4); }
+      .search-field__input { width: 160px; }
+      .search-field__input:focus { width: 200px; }
+      .icons-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--space-2); }
+    }
+
+    @media (max-width: 480px) {
+      .nav__title { font-size: var(--text-small-size); font-weight: 600; }
+      .icons-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="banner">
+    <div class="nav__brand">
+      <span class="nav__title">Linearicons</span>
+      <span class="nav__badge" id="count-badge">100</span>
+    </div>
+
+    <div class="nav__actions">
+      <!-- Search -->
+      <div class="search-field">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          class="search-field__input"
+          type="search"
+          id="search-input"
+          placeholder="Rechercher…"
+          aria-label="Rechercher une icône"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Dark mode toggle -->
+      <button class="btn-icon" id="theme-toggle" aria-label="Basculer le thème">
+        <svg id="icon-sun" aria-hidden="true" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="icon-moon" aria-hidden="true" viewBox="0 0 24 24" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="main__header">
+      <span class="main__count" id="result-count" aria-live="polite">100 icônes</span>
+    </div>
+
+    <div class="icons-grid" id="icons-grid" role="list" aria-label="Galerie d'icônes SVG"></div>
+
+    <div class="empty-state" id="empty-state" role="status">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <p>Aucune icône trouvée pour cette recherche.</p>
+    </div>
+  </main>
+
+  <script>
+    const ICONS = [
+      { file: '0001-home.svg',             name: 'home' },
+      { file: '0002-home2.svg',            name: 'home 2' },
+      { file: '0003-home3.svg',            name: 'home 3' },
+      { file: '0004-home4.svg',            name: 'home 4' },
+      { file: '0005-home5.svg',            name: 'home 5' },
+      { file: '0006-home6.svg',            name: 'home 6' },
+      { file: '0007-bathtub.svg',          name: 'bathtub' },
+      { file: '0008-toothbrush.svg',       name: 'toothbrush' },
+      { file: '0009-bed.svg',              name: 'bed' },
+      { file: '0010-couch.svg',            name: 'couch' },
+      { file: '0011-chair.svg',            name: 'chair' },
+      { file: '0012-city.svg',             name: 'city' },
+      { file: '0013-apartment.svg',        name: 'apartment' },
+      { file: '0014-pencil.svg',           name: 'pencil' },
+      { file: '0015-pencil2.svg',          name: 'pencil 2' },
+      { file: '0016-pen.svg',              name: 'pen' },
+      { file: '0017-pencil3.svg',          name: 'pencil 3' },
+      { file: '0018-eraser.svg',           name: 'eraser' },
+      { file: '0019-pencil4.svg',          name: 'pencil 4' },
+      { file: '0020-pencil5.svg',          name: 'pencil 5' },
+      { file: '0021-feather.svg',          name: 'feather' },
+      { file: '0022-feather2.svg',         name: 'feather 2' },
+      { file: '0023-feather3.svg',         name: 'feather 3' },
+      { file: '0024-pen2.svg',             name: 'pen 2' },
+      { file: '0025-pen-add.svg',          name: 'pen add' },
+      { file: '0026-pen-remove.svg',       name: 'pen remove' },
+      { file: '0027-vector.svg',           name: 'vector' },
+      { file: '0028-pen3.svg',             name: 'pen 3' },
+      { file: '0029-blog.svg',             name: 'blog' },
+      { file: '0030-brush.svg',            name: 'brush' },
+      { file: '0031-brush2.svg',           name: 'brush 2' },
+      { file: '0032-spray.svg',            name: 'spray' },
+      { file: '0033-paint-roller.svg',     name: 'paint roller' },
+      { file: '0034-stamp.svg',            name: 'stamp' },
+      { file: '0035-tape.svg',             name: 'tape' },
+      { file: '0036-desk-tape.svg',        name: 'desk tape' },
+      { file: '0037-texture.svg',          name: 'texture' },
+      { file: '0038-eye-dropper.svg',      name: 'eye dropper' },
+      { file: '0039-palette.svg',          name: 'palette' },
+      { file: '0040-color-sampler.svg',    name: 'color sampler' },
+      { file: '0041-bucket.svg',           name: 'bucket' },
+      { file: '0042-gradient.svg',         name: 'gradient' },
+      { file: '0043-gradient2.svg',        name: 'gradient 2' },
+      { file: '0044-magic-wand.svg',       name: 'magic wand' },
+      { file: '0045-magnet.svg',           name: 'magnet' },
+      { file: '0046-pencil-ruler.svg',     name: 'pencil ruler' },
+      { file: '0047-pencil-ruler2.svg',    name: 'pencil ruler 2' },
+      { file: '0048-compass.svg',          name: 'compass' },
+      { file: '0049-aim.svg',              name: 'aim' },
+      { file: '0050-gun.svg',              name: 'gun' },
+      { file: '0051-bottle.svg',           name: 'bottle' },
+      { file: '0052-drop.svg',             name: 'drop' },
+      { file: '0053-drop-crossed.svg',     name: 'drop crossed' },
+      { file: '0054-drop2.svg',            name: 'drop 2' },
+      { file: '0055-snow.svg',             name: 'snow' },
+      { file: '0056-snow2.svg',            name: 'snow 2' },
+      { file: '0057-fire.svg',             name: 'fire' },
+      { file: '0058-lighter.svg',          name: 'lighter' },
+      { file: '0059-knife.svg',            name: 'knife' },
+      { file: '0060-dagger.svg',           name: 'dagger' },
+      { file: '0061-tissue.svg',           name: 'tissue' },
+      { file: '0062-toilet-paper.svg',     name: 'toilet paper' },
+      { file: '0063-poop.svg',             name: 'poop' },
+      { file: '0064-umbrella.svg',         name: 'umbrella' },
+      { file: '0065-umbrella2.svg',        name: 'umbrella 2' },
+      { file: '0066-rain.svg',             name: 'rain' },
+      { file: '0067-tornado.svg',          name: 'tornado' },
+      { file: '0068-wind.svg',             name: 'wind' },
+      { file: '0069-fan.svg',              name: 'fan' },
+      { file: '0070-contrast.svg',         name: 'contrast' },
+      { file: '0071-sun-small.svg',        name: 'sun small' },
+      { file: '0072-sun.svg',              name: 'sun' },
+      { file: '0073-sun2.svg',             name: 'sun 2' },
+      { file: '0074-moon.svg',             name: 'moon' },
+      { file: '0075-cloud.svg',            name: 'cloud' },
+      { file: '0076-cloud-upload.svg',     name: 'cloud upload' },
+      { file: '0077-cloud-download.svg',   name: 'cloud download' },
+      { file: '0078-cloud-rain.svg',       name: 'cloud rain' },
+      { file: '0079-cloud-hailstones.svg', name: 'cloud hailstones' },
+      { file: '0080-cloud-snow.svg',       name: 'cloud snow' },
+      { file: '0081-cloud-windy.svg',      name: 'cloud windy' },
+      { file: '0082-sun-wind.svg',         name: 'sun wind' },
+      { file: '0083-cloud-fog.svg',        name: 'cloud fog' },
+      { file: '0084-cloud-sun.svg',        name: 'cloud sun' },
+      { file: '0085-cloud-lightning.svg',  name: 'cloud lightning' },
+      { file: '0086-cloud-sync.svg',       name: 'cloud sync' },
+      { file: '0087-cloud-lock.svg',       name: 'cloud lock' },
+      { file: '0088-cloud-gear.svg',       name: 'cloud gear' },
+      { file: '0089-cloud-alert.svg',      name: 'cloud alert' },
+      { file: '0090-cloud-check.svg',      name: 'cloud check' },
+      { file: '0091-cloud-cross.svg',      name: 'cloud cross' },
+      { file: '0092-cloud-crossed.svg',    name: 'cloud crossed' },
+      { file: '0093-cloud-database.svg',   name: 'cloud database' },
+      { file: '0094-database.svg',         name: 'database' },
+      { file: '0095-database-add.svg',     name: 'database add' },
+      { file: '0096-database-remove.svg',  name: 'database remove' },
+      { file: '0097-database-lock.svg',    name: 'database lock' },
+      { file: '0098-database-refresh.svg', name: 'database refresh' },
+      { file: '0099-database-check.svg',   name: 'database check' },
+      { file: '0100-database-history.svg', name: 'database history' },
+    ];
+
+    const DOWNLOAD_SVG = `<svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>`;
+
+    const grid = document.getElementById('icons-grid');
+    const searchInput = document.getElementById('search-input');
+    const resultCount = document.getElementById('result-count');
+    const countBadge = document.getElementById('count-badge');
+    const emptyState = document.getElementById('empty-state');
+
+    function buildCard(icon) {
+      const card = document.createElement('div');
+      card.className = 'icon-card';
+      card.setAttribute('role', 'listitem');
+      card.dataset.name = icon.name;
+
+      const preview = document.createElement('div');
+      preview.className = 'icon-card__preview';
+      const img = document.createElement('img');
+      img.src = `SVG/${icon.file}`;
+      img.alt = icon.name;
+      img.width = 40;
+      img.height = 40;
+      img.loading = 'lazy';
+      preview.appendChild(img);
+
+      const name = document.createElement('span');
+      name.className = 'icon-card__name';
+      name.textContent = icon.name;
+      name.title = icon.name;
+
+      const dl = document.createElement('a');
+      dl.className = 'icon-card__download';
+      dl.href = `SVG/${icon.file}`;
+      dl.download = icon.file;
+      dl.setAttribute('aria-label', `Télécharger ${icon.name}`);
+      dl.innerHTML = DOWNLOAD_SVG + 'SVG';
+
+      card.appendChild(preview);
+      card.appendChild(name);
+      card.appendChild(dl);
+      return card;
+    }
+
+    // Initial render
+    ICONS.forEach(icon => grid.appendChild(buildCard(icon)));
+
+    // Search filter
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+      grid.querySelectorAll('.icon-card').forEach((card, i) => {
+        const match = !q || ICONS[i].name.includes(q) || ICONS[i].file.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      const label = visible === 1 ? '1 icône' : `${visible} icônes`;
+      resultCount.textContent = q ? label : `${ICONS.length} icônes`;
+      countBadge.textContent = visible;
+      emptyState.classList.toggle('is-visible', visible === 0);
+    });
+
+    // Dark mode toggle
+    const root = document.documentElement;
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function isDark() {
+      return root.getAttribute('data-theme') === 'dark' ||
+        (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    function updateToggleIcon() {
+      const dark = isDark();
+      iconSun.style.display  = dark ? 'none' : '';
+      iconMoon.style.display = dark ? '' : 'none';
+    }
+
+    updateToggleIcon();
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+      updateToggleIcon();
+    });
+  </script>
+</body>
+</html>
