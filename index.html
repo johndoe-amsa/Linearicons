@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linearicons — SVG Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Tokens ─── */
+    :root {
+      --color-bg:           #FFFFFF;
+      --color-bg-secondary: #FAFAFA;
+      --color-bg-tertiary:  #F2F2F2;
+      --color-text:         #111111;
+      --color-text-muted:   #666666;
+      --color-text-subtle:  #999999;
+      --color-border:       #EAEAEA;
+      --color-border-strong:#000000;
+      --color-border-focus: #000000;
+      --color-accent:       #000000;
+      --color-accent-text:  #FFFFFF;
+      --color-success:      #16A34A;
+      --color-error:        #EE0000;
+      --color-warning:      #F5A623;
+
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', Menlo, monospace;
+
+      --text-h1-size: 42px; --text-h1-weight: 700; --text-h1-lh: 1.1; --text-h1-ls: -0.04em;
+      --text-h2-size: 28px; --text-h2-weight: 600; --text-h2-lh: 1.2; --text-h2-ls: -0.03em;
+      --text-h3-size: 20px; --text-h3-weight: 600; --text-h3-lh: 1.3; --text-h3-ls: -0.02em;
+      --text-body-size: 16px; --text-body-weight: 400; --text-body-lh: 1.5;
+      --text-small-size: 14px; --text-small-weight: 400; --text-small-lh: 1.5;
+      --text-label-size: 12px; --text-label-weight: 500; --text-label-lh: 1; --text-label-ls: 0.05em;
+      --text-code-size: 13px; --text-code-weight: 400; --text-code-lh: 1.6;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-6:  24px;
+      --space-8:  32px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      --radius-sm:   6px;
+      --radius-md:   8px;
+      --radius-lg:  12px;
+      --radius-full: 9999px;
+
+      --elevation-0: none;
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.05);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.08);
+
+      --backdrop:    blur(12px);
+      --backdrop-bg: rgba(255,255,255,0.85);
+
+      --duration-fast: 150ms;
+      --duration-base: 200ms;
+      --duration-slow: 300ms;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --z-dropdown: 100;
+      --z-modal:    200;
+      --z-toast:    300;
+      --z-tooltip:  400;
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+      --color-accent:       #EDEDED;
+      --color-accent-text:  #000000;
+      --color-bg:           #000000;
+      --color-bg-secondary: #0A0A0A;
+      --color-bg-tertiary:  #111111;
+      --color-text:         #EDEDED;
+      --color-text-muted:   #888888;
+      --color-text-subtle:  #555555;
+      --color-border:       #333333;
+      --color-border-strong:#FFFFFF;
+      --color-border-focus: #FFFFFF;
+      --backdrop-bg: rgba(0,0,0,0.85);
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.3);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.5);
+    }}
+
+    :root[data-theme="dark"] {
+      --color-accent:       #EDEDED;
+      --color-accent-text:  #000000;
+      --color-bg:           #000000;
+      --color-bg-secondary: #0A0A0A;
+      --color-bg-tertiary:  #111111;
+      --color-text:         #EDEDED;
+      --color-text-muted:   #888888;
+      --color-text-subtle:  #555555;
+      --color-border:       #333333;
+      --color-border-strong:#FFFFFF;
+      --color-border-focus: #FFFFFF;
+      --backdrop-bg: rgba(0,0,0,0.85);
+      --elevation-1: 0 4px 12px rgba(0,0,0,0.3);
+      --elevation-2: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid var(--color-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-body-size);
+      font-weight: var(--text-body-weight);
+      line-height: var(--text-body-lh);
+      color: var(--color-text);
+      background: var(--color-bg);
+      min-height: 100vh;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-dropdown);
+      height: 64px;
+      background: var(--backdrop-bg);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 var(--space-8);
+    }
+
+    .nav__inner {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-shrink: 0;
+    }
+
+    .nav__title {
+      font-size: var(--text-h3-size);
+      font-weight: var(--text-h3-weight);
+      letter-spacing: var(--text-h3-ls);
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .nav__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* ─── Search Field ─── */
+    .search-field { position: relative; display: flex; align-items: center; }
+
+    .search-field svg {
+      position: absolute;
+      left: 10px;
+      width: 16px;
+      height: 16px;
+      color: var(--color-text-subtle);
+      pointer-events: none;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .search-field__input {
+      height: 36px;
+      padding: 0 var(--space-3) 0 34px;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-small-size);
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      width: 240px;
+      transition:
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow   var(--duration-fast) var(--ease-out),
+        width        var(--duration-base) var(--ease-out);
+    }
+
+    .search-field__input::placeholder { color: var(--color-text-subtle); }
+
+    .search-field__input:focus {
+      outline: none;
+      border-color: var(--color-border-focus);
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+      width: 300px;
+    }
+
+    :root[data-theme="dark"] .search-field__input:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .search-field__input:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }}
+
+    /* ─── Dark mode toggle ─── */
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition:
+        color       var(--duration-fast) var(--ease-out),
+        background  var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .btn-icon:hover {
+      color: var(--color-text);
+      background: var(--color-bg-tertiary);
+      border-color: var(--color-border-strong);
+    }
+
+    .btn-icon:active { transform: scale(0.95); }
+
+    .btn-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── Main layout ─── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-8);
+    }
+
+    .main__header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .main__count {
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Empty state ─── */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-8);
+      color: var(--color-text-subtle);
+      gap: var(--space-3);
+    }
+
+    .empty-state svg {
+      width: 32px;
+      height: 32px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.4;
+    }
+
+    .empty-state p {
+      font-size: var(--text-small-size);
+    }
+
+    .empty-state.is-visible { display: flex; }
+
+    /* ─── Icons grid ─── */
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-3);
+    }
+
+    /* ─── Icon card ─── */
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-6) var(--space-4) var(--space-4);
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      cursor: default;
+      transition:
+        box-shadow   var(--duration-base) var(--ease-out),
+        border-color var(--duration-base) var(--ease-out);
+      position: relative;
+      min-height: 160px;
+    }
+
+    .icon-card:hover {
+      box-shadow: var(--elevation-1);
+      border-color: var(--color-border-strong);
+    }
+
+    .icon-card:hover .icon-card__download { opacity: 1; }
+
+    .icon-card__preview {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-card__preview img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    /* Dark mode: invert SVGs (they are black on white) */
+    :root[data-theme="dark"] .icon-card__preview img {
+      filter: invert(1);
+    }
+
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .icon-card__preview img {
+      filter: invert(1);
+    }}
+
+    .icon-card__name {
+      font-size: var(--text-label-size);
+      font-weight: var(--text-label-weight);
+      letter-spacing: var(--text-label-ls);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: var(--text-label-lh);
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-top: var(--space-3);
+    }
+
+    .icon-card__download {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-md);
+      color: var(--color-text-subtle);
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      transition:
+        opacity     var(--duration-fast) var(--ease-out),
+        color       var(--duration-fast) var(--ease-out),
+        background  var(--duration-fast) var(--ease-out);
+    }
+
+    .icon-card__download:hover {
+      color: var(--color-text);
+      background: var(--color-bg-tertiary);
+    }
+
+    .icon-card__download svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Touch devices: always show download */
+    @media (hover: none) {
+      .icon-card__download { opacity: 1; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav {
+        height: 56px;
+        padding: 0 var(--space-4);
+      }
+      .main { padding: var(--space-6) var(--space-4); }
+      .search-field__input { width: 160px; }
+      .search-field__input:focus { width: 200px; }
+      .icons-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
+    }
+
+    @media (max-width: 480px) {
+      .nav__title { font-size: var(--text-small-size); font-weight: 600; }
+      .icons-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="banner">
+    <div class="nav__inner">
+      <div class="nav__brand">
+        <span class="nav__title">Linearicons</span>
+        <span class="nav__badge" id="count-badge">100</span>
+      </div>
+
+      <div class="nav__actions">
+        <!-- Search -->
+        <div class="search-field">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            class="search-field__input"
+            type="search"
+            id="search-input"
+            placeholder="Rechercher…"
+            aria-label="Rechercher une icône"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Dark mode toggle -->
+        <button class="btn-icon" id="theme-toggle" aria-label="Basculer le thème">
+          <svg id="icon-sun" aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="icon-moon" aria-hidden="true" viewBox="0 0 24 24" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="main__header">
+      <span class="main__count" id="result-count" aria-live="polite">100 icônes</span>
+    </div>
+
+    <div class="icons-grid" id="icons-grid" role="list" aria-label="Galerie d'icônes SVG"></div>
+
+    <div class="empty-state" id="empty-state" role="status">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <p>Aucune icône trouvée pour cette recherche.</p>
+    </div>
+  </main>
+
+  <script>
+    const DOWNLOAD_SVG = `<svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>`;
+
+    const grid = document.getElementById('icons-grid');
+    const searchInput = document.getElementById('search-input');
+    const resultCount = document.getElementById('result-count');
+    const countBadge = document.getElementById('count-badge');
+    const emptyState = document.getElementById('empty-state');
+
+    let ALL_ICONS = [];
+
+    function nameFromFile(file) {
+      return file
+        .replace(/^\d{4}-/, '')       // "0001-home.svg" → "home.svg"
+        .replace(/\.svg$/, '')         // "home.svg"      → "home"
+        .replace(/-/g, ' ')            // "pen-add"       → "pen add"
+        .replace(/([a-z])(\d+)$/, '$1 $2'); // "home2"  → "home 2"
+    }
+
+    function forceDownload(url, filename) {
+      fetch(url)
+        .then(r => r.blob())
+        .then(blob => {
+          const blobUrl = URL.createObjectURL(blob);
+          const tmp = document.createElement('a');
+          tmp.href = blobUrl;
+          tmp.download = filename;
+          document.body.appendChild(tmp);
+          tmp.click();
+          document.body.removeChild(tmp);
+          URL.revokeObjectURL(blobUrl);
+        })
+        .catch(() => {
+          const tmp = document.createElement('a');
+          tmp.href = url;
+          tmp.download = filename;
+          tmp.click();
+        });
+    }
+
+    function buildCard(icon) {
+      const card = document.createElement('div');
+      card.className = 'icon-card';
+      card.setAttribute('role', 'listitem');
+      card.dataset.name = icon.name;
+
+      const preview = document.createElement('div');
+      preview.className = 'icon-card__preview';
+      const img = document.createElement('img');
+      img.src = `SVG/${icon.file}`;
+      img.alt = icon.name;
+      img.width = 56;
+      img.height = 56;
+      img.loading = 'lazy';
+      preview.appendChild(img);
+
+      const name = document.createElement('span');
+      name.className = 'icon-card__name';
+      name.textContent = icon.name;
+      name.title = icon.name;
+
+      const dl = document.createElement('button');
+      dl.className = 'icon-card__download';
+      dl.setAttribute('aria-label', `Télécharger ${icon.name}`);
+      dl.innerHTML = DOWNLOAD_SVG;
+      dl.addEventListener('click', () => forceDownload(`SVG/${icon.file}`, icon.file));
+
+      card.appendChild(preview);
+      card.appendChild(name);
+      card.appendChild(dl);
+      return card;
+    }
+
+    function renderIcons(icons) {
+      grid.innerHTML = '';
+      icons.forEach(icon => grid.appendChild(buildCard(icon)));
+      const n = icons.length;
+      resultCount.textContent = `${n} icône${n !== 1 ? 's' : ''}`;
+      countBadge.textContent = n;
+    }
+
+    // Search filter
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      const filtered = q
+        ? ALL_ICONS.filter(i => i.name.includes(q) || i.file.includes(q))
+        : ALL_ICONS;
+      renderIcons(filtered);
+      emptyState.classList.toggle('is-visible', filtered.length === 0);
+    });
+
+    // Dark mode toggle
+    const root = document.documentElement;
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function isDark() {
+      return root.getAttribute('data-theme') === 'dark' ||
+        (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    function updateToggleIcon() {
+      const dark = isDark();
+      iconSun.style.display  = dark ? 'none' : '';
+      iconMoon.style.display = dark ? '' : 'none';
+    }
+
+    updateToggleIcon();
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+      updateToggleIcon();
+    });
+
+    // Load icons from manifest
+    fetch('icons.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(files => {
+        ALL_ICONS = files.map(file => ({ file, name: nameFromFile(file) }));
+        renderIcons(ALL_ICONS);
+      })
+      .catch(() => {
+        resultCount.textContent = 'Impossible de charger icons.json';
+      });
+  </script>
+</body>
+</html>
