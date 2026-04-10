@@ -1,0 +1,32 @@
+name: Update icons manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'SVG/**'
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate icons.json
+        run: |
+          python3 -c "
+          import json, os
+          files = sorted(f for f in os.listdir('SVG') if f.endswith('.svg'))
+          print(json.dumps(files, indent=2))
+          " > icons.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add icons.json
+          git diff --staged --quiet || git commit -m "chore: update icons manifest"
+          git push

@@ -517,109 +517,6 @@
   </main>
 
   <script>
-    const ICONS = [
-      { file: '0001-home.svg',             name: 'home' },
-      { file: '0002-home2.svg',            name: 'home 2' },
-      { file: '0003-home3.svg',            name: 'home 3' },
-      { file: '0004-home4.svg',            name: 'home 4' },
-      { file: '0005-home5.svg',            name: 'home 5' },
-      { file: '0006-home6.svg',            name: 'home 6' },
-      { file: '0007-bathtub.svg',          name: 'bathtub' },
-      { file: '0008-toothbrush.svg',       name: 'toothbrush' },
-      { file: '0009-bed.svg',              name: 'bed' },
-      { file: '0010-couch.svg',            name: 'couch' },
-      { file: '0011-chair.svg',            name: 'chair' },
-      { file: '0012-city.svg',             name: 'city' },
-      { file: '0013-apartment.svg',        name: 'apartment' },
-      { file: '0014-pencil.svg',           name: 'pencil' },
-      { file: '0015-pencil2.svg',          name: 'pencil 2' },
-      { file: '0016-pen.svg',              name: 'pen' },
-      { file: '0017-pencil3.svg',          name: 'pencil 3' },
-      { file: '0018-eraser.svg',           name: 'eraser' },
-      { file: '0019-pencil4.svg',          name: 'pencil 4' },
-      { file: '0020-pencil5.svg',          name: 'pencil 5' },
-      { file: '0021-feather.svg',          name: 'feather' },
-      { file: '0022-feather2.svg',         name: 'feather 2' },
-      { file: '0023-feather3.svg',         name: 'feather 3' },
-      { file: '0024-pen2.svg',             name: 'pen 2' },
-      { file: '0025-pen-add.svg',          name: 'pen add' },
-      { file: '0026-pen-remove.svg',       name: 'pen remove' },
-      { file: '0027-vector.svg',           name: 'vector' },
-      { file: '0028-pen3.svg',             name: 'pen 3' },
-      { file: '0029-blog.svg',             name: 'blog' },
-      { file: '0030-brush.svg',            name: 'brush' },
-      { file: '0031-brush2.svg',           name: 'brush 2' },
-      { file: '0032-spray.svg',            name: 'spray' },
-      { file: '0033-paint-roller.svg',     name: 'paint roller' },
-      { file: '0034-stamp.svg',            name: 'stamp' },
-      { file: '0035-tape.svg',             name: 'tape' },
-      { file: '0036-desk-tape.svg',        name: 'desk tape' },
-      { file: '0037-texture.svg',          name: 'texture' },
-      { file: '0038-eye-dropper.svg',      name: 'eye dropper' },
-      { file: '0039-palette.svg',          name: 'palette' },
-      { file: '0040-color-sampler.svg',    name: 'color sampler' },
-      { file: '0041-bucket.svg',           name: 'bucket' },
-      { file: '0042-gradient.svg',         name: 'gradient' },
-      { file: '0043-gradient2.svg',        name: 'gradient 2' },
-      { file: '0044-magic-wand.svg',       name: 'magic wand' },
-      { file: '0045-magnet.svg',           name: 'magnet' },
-      { file: '0046-pencil-ruler.svg',     name: 'pencil ruler' },
-      { file: '0047-pencil-ruler2.svg',    name: 'pencil ruler 2' },
-      { file: '0048-compass.svg',          name: 'compass' },
-      { file: '0049-aim.svg',              name: 'aim' },
-      { file: '0050-gun.svg',              name: 'gun' },
-      { file: '0051-bottle.svg',           name: 'bottle' },
-      { file: '0052-drop.svg',             name: 'drop' },
-      { file: '0053-drop-crossed.svg',     name: 'drop crossed' },
-      { file: '0054-drop2.svg',            name: 'drop 2' },
-      { file: '0055-snow.svg',             name: 'snow' },
-      { file: '0056-snow2.svg',            name: 'snow 2' },
-      { file: '0057-fire.svg',             name: 'fire' },
-      { file: '0058-lighter.svg',          name: 'lighter' },
-      { file: '0059-knife.svg',            name: 'knife' },
-      { file: '0060-dagger.svg',           name: 'dagger' },
-      { file: '0061-tissue.svg',           name: 'tissue' },
-      { file: '0062-toilet-paper.svg',     name: 'toilet paper' },
-      { file: '0063-poop.svg',             name: 'poop' },
-      { file: '0064-umbrella.svg',         name: 'umbrella' },
-      { file: '0065-umbrella2.svg',        name: 'umbrella 2' },
-      { file: '0066-rain.svg',             name: 'rain' },
-      { file: '0067-tornado.svg',          name: 'tornado' },
-      { file: '0068-wind.svg',             name: 'wind' },
-      { file: '0069-fan.svg',              name: 'fan' },
-      { file: '0070-contrast.svg',         name: 'contrast' },
-      { file: '0071-sun-small.svg',        name: 'sun small' },
-      { file: '0072-sun.svg',              name: 'sun' },
-      { file: '0073-sun2.svg',             name: 'sun 2' },
-      { file: '0074-moon.svg',             name: 'moon' },
-      { file: '0075-cloud.svg',            name: 'cloud' },
-      { file: '0076-cloud-upload.svg',     name: 'cloud upload' },
-      { file: '0077-cloud-download.svg',   name: 'cloud download' },
-      { file: '0078-cloud-rain.svg',       name: 'cloud rain' },
-      { file: '0079-cloud-hailstones.svg', name: 'cloud hailstones' },
-      { file: '0080-cloud-snow.svg',       name: 'cloud snow' },
-      { file: '0081-cloud-windy.svg',      name: 'cloud windy' },
-      { file: '0082-sun-wind.svg',         name: 'sun wind' },
-      { file: '0083-cloud-fog.svg',        name: 'cloud fog' },
-      { file: '0084-cloud-sun.svg',        name: 'cloud sun' },
-      { file: '0085-cloud-lightning.svg',  name: 'cloud lightning' },
-      { file: '0086-cloud-sync.svg',       name: 'cloud sync' },
-      { file: '0087-cloud-lock.svg',       name: 'cloud lock' },
-      { file: '0088-cloud-gear.svg',       name: 'cloud gear' },
-      { file: '0089-cloud-alert.svg',      name: 'cloud alert' },
-      { file: '0090-cloud-check.svg',      name: 'cloud check' },
-      { file: '0091-cloud-cross.svg',      name: 'cloud cross' },
-      { file: '0092-cloud-crossed.svg',    name: 'cloud crossed' },
-      { file: '0093-cloud-database.svg',   name: 'cloud database' },
-      { file: '0094-database.svg',         name: 'database' },
-      { file: '0095-database-add.svg',     name: 'database add' },
-      { file: '0096-database-remove.svg',  name: 'database remove' },
-      { file: '0097-database-lock.svg',    name: 'database lock' },
-      { file: '0098-database-refresh.svg', name: 'database refresh' },
-      { file: '0099-database-check.svg',   name: 'database check' },
-      { file: '0100-database-history.svg', name: 'database history' },
-    ];
-
     const DOWNLOAD_SVG = `<svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>`;
 
     const grid = document.getElementById('icons-grid');
@@ -627,6 +524,16 @@
     const resultCount = document.getElementById('result-count');
     const countBadge = document.getElementById('count-badge');
     const emptyState = document.getElementById('empty-state');
+
+    let ALL_ICONS = [];
+
+    function nameFromFile(file) {
+      return file
+        .replace(/^\d{4}-/, '')       // "0001-home.svg" → "home.svg"
+        .replace(/\.svg$/, '')         // "home.svg"      → "home"
+        .replace(/-/g, ' ')            // "pen-add"       → "pen add"
+        .replace(/([a-z])(\d+)$/, '$1 $2'); // "home2"  → "home 2"
+    }
 
     function forceDownload(url, filename) {
       fetch(url)
@@ -642,7 +549,6 @@
           URL.revokeObjectURL(blobUrl);
         })
         .catch(() => {
-          // Fallback pour file:// protocol
           const tmp = document.createElement('a');
           tmp.href = url;
           tmp.download = filename;
@@ -683,22 +589,22 @@
       return card;
     }
 
-    // Initial render
-    ICONS.forEach(icon => grid.appendChild(buildCard(icon)));
+    function renderIcons(icons) {
+      grid.innerHTML = '';
+      icons.forEach(icon => grid.appendChild(buildCard(icon)));
+      const n = icons.length;
+      resultCount.textContent = `${n} icône${n !== 1 ? 's' : ''}`;
+      countBadge.textContent = n;
+    }
 
     // Search filter
     searchInput.addEventListener('input', () => {
       const q = searchInput.value.trim().toLowerCase();
-      let visible = 0;
-      grid.querySelectorAll('.icon-card').forEach((card, i) => {
-        const match = !q || ICONS[i].name.includes(q) || ICONS[i].file.includes(q);
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
-      });
-      const label = visible === 1 ? '1 icône' : `${visible} icônes`;
-      resultCount.textContent = q ? label : `${ICONS.length} icônes`;
-      countBadge.textContent = visible;
-      emptyState.classList.toggle('is-visible', visible === 0);
+      const filtered = q
+        ? ALL_ICONS.filter(i => i.name.includes(q) || i.file.includes(q))
+        : ALL_ICONS;
+      renderIcons(filtered);
+      emptyState.classList.toggle('is-visible', filtered.length === 0);
     });
 
     // Dark mode toggle
@@ -723,6 +629,17 @@
       root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
       updateToggleIcon();
     });
+
+    // Load icons from manifest
+    fetch('icons.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(files => {
+        ALL_ICONS = files.map(file => ({ file, name: nameFromFile(file) }));
+        renderIcons(ALL_ICONS);
+      })
+      .catch(() => {
+        resultCount.textContent = 'Impossible de charger icons.json';
+      });
   </script>
 </body>
 </html>
