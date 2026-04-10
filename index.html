@@ -282,9 +282,40 @@
 
     .main__header {
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      justify-content: space-between;
       gap: var(--space-3);
       margin-bottom: var(--space-6);
+    }
+
+    /* ─── Color picker ─── */
+    .color-picker {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background: var(--swatch-color);
+      border: 1px solid var(--color-border);
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      transition:
+        transform    var(--duration-fast) var(--ease-out),
+        box-shadow   var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .color-swatch:hover { transform: scale(1.1); }
+
+    .color-swatch[aria-checked="true"] {
+      box-shadow:
+        0 0 0 2px var(--color-bg),
+        0 0 0 4px var(--color-border-focus);
     }
 
     .main__count {
@@ -363,20 +394,45 @@
       justify-content: center;
     }
 
-    .icon-card__preview img {
+    .icon-card__icon {
       width: 56px;
       height: 56px;
-      object-fit: contain;
+      background-color: var(--icon-color, var(--color-text));
+      -webkit-mask-image: var(--icon-url);
+              mask-image: var(--icon-url);
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+              mask-position: center;
+      -webkit-mask-size: contain;
+              mask-size: contain;
+      transition: background-color var(--duration-fast) var(--ease-out);
     }
 
-    /* Dark mode: invert SVGs (they are black on white) */
-    :root[data-theme="dark"] .icon-card__preview img {
-      filter: invert(1);
+    /* ─── Icon color overrides (adapts card background for contrast) ─── */
+    :root[data-icon-color="black"] { --icon-color: #000000; }
+    :root[data-icon-color="black"] .icon-card {
+      background: #FAFAFA;
+      border-color: #EAEAEA;
     }
+    :root[data-icon-color="black"] .icon-card__name { color: #666666; }
+    :root[data-icon-color="black"] .icon-card:hover { border-color: #000000; }
 
-    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .icon-card__preview img {
-      filter: invert(1);
-    }}
+    :root[data-icon-color="white"] { --icon-color: #FFFFFF; }
+    :root[data-icon-color="white"] .icon-card {
+      background: #0A0A0A;
+      border-color: #222222;
+    }
+    :root[data-icon-color="white"] .icon-card__name { color: #888888; }
+    :root[data-icon-color="white"] .icon-card:hover { border-color: #FFFFFF; }
+
+    :root[data-icon-color="blue"] { --icon-color: #005092; }
+    :root[data-icon-color="blue"] .icon-card {
+      background: #FAFAFA;
+      border-color: #EAEAEA;
+    }
+    :root[data-icon-color="blue"] .icon-card__name { color: #666666; }
+    :root[data-icon-color="blue"] .icon-card:hover { border-color: #005092; }
 
     .icon-card__name {
       font-size: var(--text-label-size);
@@ -505,6 +561,35 @@
   <main class="main">
     <div class="main__header">
       <span class="main__count" id="result-count" aria-live="polite">100 icônes</span>
+      <div class="color-picker" role="radiogroup" aria-label="Couleur des icônes">
+        <button
+          class="color-swatch"
+          data-color="white"
+          style="--swatch-color: #FFFFFF"
+          role="radio"
+          aria-checked="false"
+          aria-label="Blanc"
+          title="Blanc"
+        ></button>
+        <button
+          class="color-swatch"
+          data-color="black"
+          style="--swatch-color: #000000"
+          role="radio"
+          aria-checked="true"
+          aria-label="Noir"
+          title="Noir"
+        ></button>
+        <button
+          class="color-swatch"
+          data-color="blue"
+          style="--swatch-color: #005092"
+          role="radio"
+          aria-checked="false"
+          aria-label="Bleu Applitec"
+          title="Bleu Applitec"
+        ></button>
+      </div>
     </div>
 
     <div class="icons-grid" id="icons-grid" role="list" aria-label="Galerie d'icônes SVG"></div>
@@ -520,6 +605,12 @@
   <script>
     const DOWNLOAD_SVG = `<svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>`;
 
+    const COLOR_MAP = {
+      white: '#FFFFFF',
+      black: '#000000',
+      blue:  '#005092',
+    };
+
     const grid = document.getElementById('icons-grid');
     const searchInput = document.getElementById('search-input');
     const resultCount = document.getElementById('result-count');
@@ -527,6 +618,7 @@
     const emptyState = document.getElementById('empty-state');
 
     let ALL_ICONS = [];
+    let currentColorKey = 'black';
 
     function nameFromFile(file) {
       return file
@@ -536,10 +628,28 @@
         .replace(/([a-z])(\d+)$/, '$1 $2'); // "home2"  → "home 2"
     }
 
+    function recolorSvg(svgText, color) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgText, 'image/svg+xml');
+      const svg = doc.documentElement;
+      if (svg.querySelector('parsererror')) return svgText;
+
+      [svg, ...svg.querySelectorAll('*')].forEach(el => {
+        const stroke = el.getAttribute('stroke');
+        const fill   = el.getAttribute('fill');
+        if (stroke && stroke.toLowerCase() !== 'none') el.setAttribute('stroke', color);
+        if (fill   && fill.toLowerCase()   !== 'none') el.setAttribute('fill',   color);
+      });
+      return new XMLSerializer().serializeToString(svg);
+    }
+
     function forceDownload(url, filename) {
+      const color = COLOR_MAP[currentColorKey];
       fetch(url)
-        .then(r => r.blob())
-        .then(blob => {
+        .then(r => r.text())
+        .then(svgText => {
+          const recolored = recolorSvg(svgText, color);
+          const blob = new Blob([recolored], { type: 'image/svg+xml;charset=utf-8' });
           const blobUrl = URL.createObjectURL(blob);
           const tmp = document.createElement('a');
           tmp.href = blobUrl;
@@ -565,13 +675,12 @@
 
       const preview = document.createElement('div');
       preview.className = 'icon-card__preview';
-      const img = document.createElement('img');
-      img.src = `SVG/${icon.file}`;
-      img.alt = icon.name;
-      img.width = 56;
-      img.height = 56;
-      img.loading = 'lazy';
-      preview.appendChild(img);
+      const iconEl = document.createElement('div');
+      iconEl.className = 'icon-card__icon';
+      iconEl.style.setProperty('--icon-url', `url("SVG/${icon.file}")`);
+      iconEl.setAttribute('role', 'img');
+      iconEl.setAttribute('aria-label', icon.name);
+      preview.appendChild(iconEl);
 
       const name = document.createElement('span');
       name.className = 'icon-card__name';
@@ -621,6 +730,22 @@
       renderIcons(filtered);
       emptyState.classList.toggle('is-visible', filtered.length === 0);
     });
+
+    // Color picker
+    function setIconColor(colorKey) {
+      if (!COLOR_MAP[colorKey]) return;
+      currentColorKey = colorKey;
+      document.documentElement.setAttribute('data-icon-color', colorKey);
+      document.querySelectorAll('.color-swatch').forEach(sw => {
+        sw.setAttribute('aria-checked', sw.dataset.color === colorKey ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('.color-swatch').forEach(sw => {
+      sw.addEventListener('click', () => setIconColor(sw.dataset.color));
+    });
+
+    setIconColor('black');
 
     // Dark mode toggle
     const root = document.documentElement;
